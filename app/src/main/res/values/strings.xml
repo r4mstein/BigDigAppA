@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BigDigAppA</string>
+
+    <string name="tab_name_test">Test</string>
+    <string name="tab_name_history">History</string>
+
+    <string name="test_edit_text_hint">Enter your picture link</string>
+
+    <string name="warning_empty_link_field">Enter link please</string>
+    <string name="warning_valid_link">The link isn\'t valid</string>
 </resources>

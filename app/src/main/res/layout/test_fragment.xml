@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etLink_TF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/firasans_regular"
+        android:hint="@string/test_edit_text_hint"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+
+    <Button
+        android:id="@+id/btnOk_TF"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/etLink_TF"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/bg_btn_ok"
+        android:fontFamily="@font/firasans_medium"
+        android:text="@android:string/ok"
+        android:textColor="@android:color/white"
+        />
+
+</RelativeLayout>
