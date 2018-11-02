@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.R;
+import ua.r4mste1n.digitals.big.bigdigappa.main.home_fragment.HomeFragment;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseActivity;
 
 public class MainActivity extends BaseActivity<IMainNavigator, IMainContract.Model>
@@ -22,5 +23,12 @@ public class MainActivity extends BaseActivity<IMainNavigator, IMainContract.Mod
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bindView(this);
+        showHomeFragment();
+    }
+
+    @DebugLog
+    @Override
+    public final void showHomeFragment() {
+        replaceFragment(R.id.flRootContainer_AM, HomeFragment.newInstance());
     }
 }

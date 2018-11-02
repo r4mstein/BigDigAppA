@@ -1,6 +1,8 @@
 package ua.r4mste1n.digitals.big.bigdigappa.main.di;
 
 import dagger.Component;
+import ua.r4mste1n.digitals.big.bigdigappa.main.home_fragment.HomeFragment;
+import ua.r4mste1n.digitals.big.bigdigappa.main.home_fragment.di.DiHomeFragmentModule;
 import ua.r4mste1n.digitals.big.bigdigappa.main.navigator.MainActivity;
 import ua.r4mste1n.digitals.big.bigdigappa.root.di.DiRootComponent;
 
@@ -9,9 +11,11 @@ import ua.r4mste1n.digitals.big.bigdigappa.root.di.DiRootComponent;
  */
 @MainScope
 @Component(modules = {
-        DiMainModule.class
+        DiMainModule.class,
+        DiHomeFragmentModule.class
 },
         dependencies = {DiRootComponent.class})
 public interface DiMainComponent {
     void inject(MainActivity _activity);
+    void inject(HomeFragment _fragment);
 }
