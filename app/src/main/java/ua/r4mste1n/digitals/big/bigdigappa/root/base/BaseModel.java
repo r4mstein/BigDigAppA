@@ -7,7 +7,7 @@ import hugo.weaving.DebugLog;
 /**
  * Created by Alex Shtain on 02.11.2018.
  */
-public final class BaseModel<P extends IPresenter> implements IModel<P> {
+public abstract class BaseModel<P extends IPresenter> implements IModel<P> {
 
     protected P mPresenter;
 
