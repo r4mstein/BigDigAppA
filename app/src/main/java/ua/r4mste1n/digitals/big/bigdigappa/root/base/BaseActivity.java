@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import ua.r4mste1n.digitals.big.bigdigappa.root.ObjectGraph;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -19,6 +20,7 @@ public abstract class BaseActivity<N extends INavigator, M extends IModel> exten
     protected N mNavigator;
     @Inject
     protected M mModel;
+    protected ObjectGraph mObjectGraph;
 
     protected abstract void init();
 
@@ -30,6 +32,7 @@ public abstract class BaseActivity<N extends INavigator, M extends IModel> exten
     @Override
     protected void onCreate(@Nullable final Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        mObjectGraph = ObjectGraph.getInstance(getApplication());
         init();
     }
 

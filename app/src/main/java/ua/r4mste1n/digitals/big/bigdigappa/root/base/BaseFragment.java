@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import ua.r4mste1n.digitals.big.bigdigappa.root.ObjectGraph;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -24,6 +25,7 @@ public abstract class BaseFragment<N extends INavigator, M extends IModel> exten
     protected N mNavigator;
     @Inject
     protected M mModel;
+    protected ObjectGraph mObjectGraph;
     protected Unbinder mUnbinder;
 
     protected abstract void init();
@@ -33,6 +35,7 @@ public abstract class BaseFragment<N extends INavigator, M extends IModel> exten
         super.onAttach(_context);
         //noinspection unchecked
         mNavigator = ((INavigatorProvider<N>) Objects.requireNonNull(getActivity())).getNavigator();
+        mObjectGraph = ObjectGraph.getInstance(getActivity().getApplication());
         init();
     }
 
