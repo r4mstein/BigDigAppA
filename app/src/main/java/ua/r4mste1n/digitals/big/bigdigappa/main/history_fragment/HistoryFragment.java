@@ -1,5 +1,7 @@
 package ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +20,7 @@ import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.Adapter
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.AdapterData;
 import ua.r4mste1n.digitals.big.bigdigappa.main.navigator.IMainNavigator;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseFragment;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Link;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -29,6 +32,7 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
     RecyclerView rvList;
 
     private Adapter mAdapter;
+    private LiveData<List<Link>> mData;
 
     @DebugLog
     public static HistoryFragment newInstance() {
@@ -51,11 +55,27 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
         return view;
     }
 
+    @DebugLog
     @Override
     public void onStart() {
         super.onStart();
-        mModel.loadData();
+        mData = mModel.loadData();
+        mData.observe(this, mDataObserver);
     }
+
+    @DebugLog
+    @Override
+    public void onStop() {
+        super.onStop();
+        mData.removeObserver(mDataObserver);
+    }
+
+    private final Observer<List<Link>> mDataObserver = new Observer<List<Link>>() {
+        @Override
+        public void onChanged(@Nullable final List<Link> _links) {
+            dataLoaded(mModel.convertToAdapterData(_links));
+        }
+    };
 
     @DebugLog
     private void setupList() {
@@ -65,8 +85,7 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
     }
 
     @DebugLog
-    @Override
-    public void dataLoaded(final List<AdapterData> _data) {
+    private void dataLoaded(final List<AdapterData> _data) {
         mAdapter.addData(_data);
     }
 }

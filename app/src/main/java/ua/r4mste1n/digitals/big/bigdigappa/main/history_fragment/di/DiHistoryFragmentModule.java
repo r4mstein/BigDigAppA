@@ -1,5 +1,7 @@
 package ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.di;
 
+import android.content.Context;
+
 import dagger.Module;
 import dagger.Provides;
 import ua.r4mste1n.digitals.big.bigdigappa.main.di.MainScope;
@@ -14,7 +16,7 @@ public final class DiHistoryFragmentModule {
 
     @Provides
     @MainScope
-    final IHistoryFragmentContract.Model provideHistoryFragmentModel() {
-        return new HistoryFragmentModelImpl();
+    final IHistoryFragmentContract.Model provideHistoryFragmentModel(final Context _context) {
+        return new HistoryFragmentModelImpl(_context);
     }
 }
