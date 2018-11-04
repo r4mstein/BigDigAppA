@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.R;
+import ua.r4mste1n.digitals.big.bigdigappa.main.Constants.Status;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -38,7 +42,7 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder _holder, final int _position) {
         final AdapterData data = mData.get(_position);
         _holder.tvLink.setText(data.getLink());
-        _holder.tvTime.setText(data.getTime() + "");
+        _holder.tvTime.setText(createFormattedDate(data.getTime()));
         setupBackgroundColor(_holder, data);
         _holder.itemView.setOnClickListener(v -> mClickListener.itemClicked(data));
     }
@@ -50,16 +54,23 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private void setupBackgroundColor(final ViewHolder _holder, final AdapterData _data) {
         switch (_data.getStatus()) {
-            case 1:
+            case Status.LOADED:
                 _holder.cvContainer.setCardBackgroundColor(mContext.getResources().getColor(R.color.green_400));
                 break;
-            case 2:
+            case Status.ERROR:
                 _holder.cvContainer.setCardBackgroundColor(mContext.getResources().getColor(R.color.red_400));
                 break;
-            case 3:
+            case Status.UNKNOWN:
                 _holder.cvContainer.setCardBackgroundColor(mContext.getResources().getColor(R.color.grey_400));
                 break;
         }
+    }
+
+    private String createFormattedDate(final long _date) {
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.US);
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(_date);
+        return formatter.format(calendar.getTime());
     }
 
     @DebugLog

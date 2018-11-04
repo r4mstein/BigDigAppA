@@ -39,6 +39,7 @@ public final class HistoryFragmentModelImpl extends BaseModel<IHistoryFragmentCo
         final List<AdapterData> dataList = new ArrayList<>();
         for (Link link : _links) {
             final AdapterData data = new AdapterData();
+            data.setId(link.getId());
             data.setLink(link.getUrl());
             data.setStatus(link.getStatus());
             data.setTime(link.getDate());
