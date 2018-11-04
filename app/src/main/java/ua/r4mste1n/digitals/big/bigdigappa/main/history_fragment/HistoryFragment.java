@@ -18,6 +18,7 @@ import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.R;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.Adapter;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.AdapterData;
+import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.ClickListener;
 import ua.r4mste1n.digitals.big.bigdigappa.main.navigator.IMainNavigator;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseFragment;
 import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Link;
@@ -70,19 +71,23 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
         mData.removeObserver(mDataObserver);
     }
 
-    private final Observer<List<Link>> mDataObserver = new Observer<List<Link>>() {
-        @Override
-        public void onChanged(@Nullable final List<Link> _links) {
-            dataLoaded(mModel.convertToAdapterData(_links));
-        }
-    };
+    private final Observer<List<Link>> mDataObserver = _links -> dataLoaded(mModel.convertToAdapterData(_links));
 
     @DebugLog
     private void setupList() {
         rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new Adapter(getContext());
+        mAdapter.setClickListener(mAdapterClickListener);
         rvList.setAdapter(mAdapter);
     }
+
+    private final ClickListener mAdapterClickListener = data ->
+            mNavigator.openAppB(new AdapterData()
+                    .setLink(data.getLink())
+                    .setId(data.getId())
+                    .setStatus(data.getStatus())
+                    .setTime(data.getTime()),
+            true);
 
     @DebugLog
     private void dataLoaded(final List<AdapterData> _data) {

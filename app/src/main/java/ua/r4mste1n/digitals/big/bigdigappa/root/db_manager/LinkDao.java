@@ -9,13 +9,16 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Constants.ColumnNames;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Constants.UriData;
+
 /**
  * Created by Alex Shtain on 02.11.2018.
  */
 @Dao
 public interface LinkDao {
 
-    @Query("SELECT * FROM " + Link.TABLE_NAME)
+    @Query("SELECT * FROM " + UriData.TABLE_NAME)
     LiveData<List<Link>> getAllLinks();
 
     @Insert
@@ -27,6 +30,6 @@ public interface LinkDao {
     @Delete
     void delete(Link link);
 
-    @Query("DELETE FROM " + Link.TABLE_NAME + " WHERE " + Link.COLUMN_ID + " = :id")
+    @Query("DELETE FROM " + UriData.TABLE_NAME + " WHERE " + ColumnNames.COLUMN_ID + " = :id")
     int deleteById(long id);
 }

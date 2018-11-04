@@ -4,10 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.content.ContentValues;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
 import hugo.weaving.DebugLog;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Constants.ColumnNames;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -16,29 +16,23 @@ import hugo.weaving.DebugLog;
 @Entity
 public class Link {
 
-    public static final String TABLE_NAME = "link";
-    public static final String COLUMN_ID = BaseColumns._ID;
-    public static final String COLUMN_URL = "url";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_STATUS = "status";
-
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = COLUMN_ID)
+    @ColumnInfo(name = ColumnNames.COLUMN_ID)
     private long id;
-    @ColumnInfo(name = COLUMN_URL)
+    @ColumnInfo(name = ColumnNames.COLUMN_URL)
     private String url;
-    @ColumnInfo(name = COLUMN_DATE)
+    @ColumnInfo(name = ColumnNames.COLUMN_DATE)
     private long date;
-    @ColumnInfo(name = COLUMN_STATUS)
+    @ColumnInfo(name = ColumnNames.COLUMN_STATUS)
     private int status;
 
     @DebugLog
     public static Link fromContentValues(final ContentValues _values) {
         final Link link = new Link();
-        if (_values.containsKey(COLUMN_ID)) link.id = _values.getAsLong(COLUMN_ID);
-        if (_values.containsKey(COLUMN_URL)) link.url = _values.getAsString(COLUMN_URL);
-        if (_values.containsKey(COLUMN_DATE)) link.date = _values.getAsLong(COLUMN_DATE);
-        if (_values.containsKey(COLUMN_STATUS)) link.status = _values.getAsInteger(COLUMN_STATUS);
+        if (_values.containsKey(ColumnNames.COLUMN_ID)) link.id = _values.getAsLong(ColumnNames.COLUMN_ID);
+        if (_values.containsKey(ColumnNames.COLUMN_URL)) link.url = _values.getAsString(ColumnNames.COLUMN_URL);
+        if (_values.containsKey(ColumnNames.COLUMN_DATE)) link.date = _values.getAsLong(ColumnNames.COLUMN_DATE);
+        if (_values.containsKey(ColumnNames.COLUMN_STATUS)) link.status = _values.getAsInteger(ColumnNames.COLUMN_STATUS);
         return link;
     }
 

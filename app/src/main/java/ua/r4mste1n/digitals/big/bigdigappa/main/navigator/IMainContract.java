@@ -9,7 +9,7 @@ import ua.r4mste1n.digitals.big.bigdigappa.root.base.IPresenter;
 public interface IMainContract {
 
     interface Presenter extends IPresenter {
-        void showHomeFragment();
+
     }
 
     interface Model extends IModel<Presenter> {

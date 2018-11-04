@@ -13,14 +13,12 @@ import android.support.annotation.Nullable;
 import java.util.Objects;
 
 import hugo.weaving.DebugLog;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Constants.UriData;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
  */
 public final class LinksContentProvider extends ContentProvider {
-
-    public static final String AUTHORITY = "ua.r4mste1n.digitals.big.bigdigappa";
-    public static final Uri URI_LINK = Uri.parse("content://" + AUTHORITY + "/" + Link.TABLE_NAME);
 
     private static final int CODE_LINK_DIR          = 1;
     private static final int CODE_LINK_ITEM         = 2;
@@ -28,8 +26,8 @@ public final class LinksContentProvider extends ContentProvider {
     private static final UriMatcher MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        MATCHER.addURI(AUTHORITY, Link.TABLE_NAME, CODE_LINK_DIR);
-        MATCHER.addURI(AUTHORITY, Link.TABLE_NAME + "/*", CODE_LINK_ITEM);
+        MATCHER.addURI(UriData.AUTHORITY, UriData.TABLE_NAME, CODE_LINK_DIR);
+        MATCHER.addURI(UriData.AUTHORITY, UriData.TABLE_NAME + "/*", CODE_LINK_ITEM);
     }
 
     @Override
@@ -50,9 +48,9 @@ public final class LinksContentProvider extends ContentProvider {
     public String getType(@NonNull final Uri _uri) {
         switch (MATCHER.match(_uri)) {
             case CODE_LINK_DIR:
-                return "vnd.android.cursor.dir/" + AUTHORITY + "." + Link.TABLE_NAME;
+                return "vnd.android.cursor.dir/" + UriData.AUTHORITY + "." + UriData.TABLE_NAME;
             case CODE_LINK_ITEM:
-                return "vnd.android.cursor.item/" + AUTHORITY + "." + Link.TABLE_NAME;
+                return "vnd.android.cursor.item/" + UriData.AUTHORITY + "." + UriData.TABLE_NAME;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + _uri);
         }

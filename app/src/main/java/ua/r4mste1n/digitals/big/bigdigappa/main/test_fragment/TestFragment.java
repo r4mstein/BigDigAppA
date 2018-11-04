@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.R;
+import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.AdapterData;
 import ua.r4mste1n.digitals.big.bigdigappa.main.navigator.IMainNavigator;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseFragment;
 
@@ -48,9 +49,9 @@ public final class TestFragment extends BaseFragment<IMainNavigator, ITestFragme
 
     @OnClick(R.id.btnOk_TF)
     final void onClickOk() {
-        if (isEnteredValidLink(etLink.getText().toString())) {
-            Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
-            etLink.setText("");
+        final String link = etLink.getText().toString().trim();
+        if (isEnteredValidLink(link)) {
+            if (mNavigator.openAppB(new AdapterData().setLink(link), false)) etLink.setText("");
         }
     }
 

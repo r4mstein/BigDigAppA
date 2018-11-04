@@ -4,39 +4,53 @@ package ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter;
  * Created by Alex Shtain on 02.11.2018.
  */
 public final class AdapterData {
+    private long mId = -1;
     private String mLink;
-    private String mTime;
+    private long mTime;
     private int mStatus;
+
+    public long getId() {
+        return mId;
+    }
+
+    public AdapterData setId(long id) {
+        mId = id;
+        return this;
+    }
 
     public String getLink() {
         return mLink;
     }
 
-    public void setLink(String link) {
+    public AdapterData setLink(String link) {
         mLink = link;
+        return this;
     }
 
-    public String getTime() {
+    public long getTime() {
         return mTime;
     }
 
-    public void setTime(String time) {
+    public AdapterData setTime(long time) {
         mTime = time;
+        return this;
     }
 
     public int getStatus() {
         return mStatus;
     }
 
-    public void setStatus(int status) {
+    public AdapterData setStatus(int status) {
         mStatus = status;
+        return this;
     }
 
     @Override
     public String toString() {
         return "AdapterData{" +
-                "mLink='" + mLink + '\'' +
-                ", mTime='" + mTime + '\'' +
+                "mId=" + mId +
+                ", mLink='" + mLink + '\'' +
+                ", mTime=" + mTime +
                 ", mStatus=" + mStatus +
                 '}';
     }

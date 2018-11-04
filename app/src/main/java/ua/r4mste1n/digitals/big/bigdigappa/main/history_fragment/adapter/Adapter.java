@@ -22,6 +22,7 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private List<AdapterData> mData = new ArrayList<>();
     private Context mContext;
+    private ClickListener mClickListener;
 
     public Adapter(final Context _context) {
         mContext = _context;
@@ -37,8 +38,9 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder _holder, final int _position) {
         final AdapterData data = mData.get(_position);
         _holder.tvLink.setText(data.getLink());
-        _holder.tvTime.setText(data.getTime());
+        _holder.tvTime.setText(data.getTime() + "");
         setupBackgroundColor(_holder, data);
+        _holder.itemView.setOnClickListener(v -> mClickListener.itemClicked(data));
     }
 
     @Override
@@ -65,6 +67,10 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         mData.clear();
         mData.addAll(_data);
         notifyDataSetChanged();
+    }
+
+    public final void setClickListener(final ClickListener _clickListener) {
+        mClickListener = _clickListener;
     }
 
     public final class ViewHolder extends RecyclerView.ViewHolder {
