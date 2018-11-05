@@ -1,7 +1,6 @@
 package ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment;
 
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +8,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import hugo.weaving.DebugLog;
+import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.IHistoryFragmentContract.SortingType;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.AdapterData;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseModel;
-import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.AppDatabase;
-import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Link;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.IDBManager;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database.Link;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -20,17 +20,25 @@ import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Link;
 public final class HistoryFragmentModelImpl extends BaseModel<IHistoryFragmentContract.Presenter>
         implements IHistoryFragmentContract.Model {
 
-    private final Context mContext;
+    private final IDBManager mDBManager;
 
     @Inject
-    public HistoryFragmentModelImpl(final Context _context) {
-        mContext = _context;
+    public HistoryFragmentModelImpl(final IDBManager _dbManager) {
+        mDBManager = _dbManager;
     }
 
     @DebugLog
     @Override
-    public final LiveData<List<Link>> loadData() {
-        return AppDatabase.getInstance(mContext).linkDao().getAllLinks();
+    public final LiveData<List<Link>> loadData(final SortingType _type) {
+        switch (_type) {
+            case BY_DATE:
+                return mDBManager.getLinksByDate();
+            case BY_STATUS:
+                return mDBManager.getLinksByStatus();
+            case DEFAULT:
+                return mDBManager.getAllLinks();
+            default: throw new IllegalArgumentException("Illegal sorting type");
+        }
     }
 
     @DebugLog

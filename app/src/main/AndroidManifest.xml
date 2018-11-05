@@ -8,9 +8,9 @@
     <application
         android:name=".root.App"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_a"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_a_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -23,7 +23,7 @@
         </activity>
 
         <provider
-            android:name=".root.db_manager.LinksContentProvider"
+            android:name=".root.db_manager.provider.LinksContentProvider"
             android:authorities="ua.r4mste1n.digitals.big.bigdigappa"
             android:exported="true"
             android:permission="ua.r4mste1n.digitals.big.bigdigappa.READ_WRITE"

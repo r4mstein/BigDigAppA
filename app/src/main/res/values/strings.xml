@@ -8,4 +8,8 @@
 
     <string name="warning_empty_link_field">Enter link please</string>
     <string name="warning_valid_link">The link isn\'t valid</string>
+
+    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_by_status">Sort by status</string>
+    <string name="sort_by_default">Sort by default</string>
 </resources>

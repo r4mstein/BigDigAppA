@@ -1,7 +1,9 @@
 package ua.r4mste1n.digitals.big.bigdigappa.main.navigator;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity<IMainNavigator, IMainContract.Mod
     @DebugLog
     private void setupUI() {
         toolbar.setTitle(getString(R.string.app_name));
+        Objects.requireNonNull(toolbar.getOverflowIcon())
+                .setColorFilter(ContextCompat.getColor(this, android.R.color.white), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
     }
 

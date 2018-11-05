@@ -1,4 +1,4 @@
-package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager;
+package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -14,6 +14,8 @@ import java.util.Objects;
 
 import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Constants.UriData;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database.AppDatabase;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database.Link;
 
 /**
  * Created by Alex Shtain on 02.11.2018.

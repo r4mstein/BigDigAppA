@@ -1,4 +1,4 @@
-package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager;
+package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -20,6 +20,12 @@ public interface LinkDao {
 
     @Query("SELECT * FROM " + UriData.TABLE_NAME)
     LiveData<List<Link>> getAllLinks();
+
+    @Query("SELECT * FROM " + UriData.TABLE_NAME + " ORDER BY " + ColumnNames.COLUMN_DATE + " DESC")
+    LiveData<List<Link>> getLinksByDate();
+
+    @Query("SELECT * FROM " + UriData.TABLE_NAME + " ORDER BY " + ColumnNames.COLUMN_STATUS)
+    LiveData<List<Link>> getLinksByStatus();
 
     @Insert
     long insert(Link link);

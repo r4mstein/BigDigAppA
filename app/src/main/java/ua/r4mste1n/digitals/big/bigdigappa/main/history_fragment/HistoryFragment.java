@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,12 +19,13 @@ import java.util.List;
 import butterknife.BindView;
 import hugo.weaving.DebugLog;
 import ua.r4mste1n.digitals.big.bigdigappa.R;
+import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.IHistoryFragmentContract.SortingType;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.Adapter;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.AdapterData;
 import ua.r4mste1n.digitals.big.bigdigappa.main.history_fragment.adapter.ClickListener;
 import ua.r4mste1n.digitals.big.bigdigappa.main.navigator.IMainNavigator;
 import ua.r4mste1n.digitals.big.bigdigappa.root.base.BaseFragment;
-import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.Link;
+import ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database.Link;
 
 /**
  * Created by Alex Shtain on 02.11.2018.
@@ -53,6 +57,7 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
         final View view = _inflater.inflate(R.layout.history_fragment, _container, false);
         bindView(this, view);
         setupList();
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -60,7 +65,7 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
     @Override
     public void onStart() {
         super.onStart();
-        mData = mModel.loadData();
+        if (mData == null) mData = mModel.loadData(SortingType.DEFAULT);
         mData.observe(this, mDataObserver);
     }
 
@@ -69,6 +74,35 @@ public final class HistoryFragment extends BaseFragment<IMainNavigator, IHistory
     public void onStop() {
         super.onStop();
         mData.removeObserver(mDataObserver);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu _menu, final MenuInflater _inflater) {
+        _inflater.inflate(R.menu.sorting_menu, _menu);
+    }
+
+    @DebugLog
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem _item) {
+        switch (_item.getItemId()) {
+            case R.id.sortingByDate:
+                loadDataAfterMenuClicked(SortingType.BY_DATE);
+                return true;
+            case R.id.sortingByStatus:
+                loadDataAfterMenuClicked(SortingType.BY_STATUS);
+                return true;
+            case R.id.sortingByDefault:
+                loadDataAfterMenuClicked(SortingType.DEFAULT);
+                return true;
+            default: return super.onOptionsItemSelected(_item);
+        }
+    }
+
+    @DebugLog
+    private void loadDataAfterMenuClicked(final SortingType _type) {
+        mData.removeObserver(mDataObserver);
+        mData = mModel.loadData(_type);
+        mData.observe(this, mDataObserver);
     }
 
     private final Observer<List<Link>> mDataObserver = _links -> dataLoaded(mModel.convertToAdapterData(_links));

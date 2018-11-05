@@ -1,4 +1,4 @@
-package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager;
+package ua.r4mste1n.digitals.big.bigdigappa.root.db_manager.database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

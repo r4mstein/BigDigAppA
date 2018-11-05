@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
  */
 public final class Constants {
 
-    interface UriData {
+    public interface UriData {
         String TABLE_NAME       = "link";
         String AUTHORITY        = "ua.r4mste1n.digitals.big.bigdigappa";
         Uri URI_LINK            = android.net.Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
